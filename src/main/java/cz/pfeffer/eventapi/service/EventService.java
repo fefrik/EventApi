@@ -62,6 +62,7 @@ public class EventService {
     }
 
     public List<UserCountResponse> getDateAndUserCountByDocIdAndDateRange(String docId, LocalDate startDate, LocalDate endDate) {
+
         return eventRepository.findUniqueUsersByDocIdAndDateRange(docId, startDate, endDate).stream()
                 .map(r -> {
                     Date sqlDate = (Date) r[0];
@@ -72,12 +73,10 @@ public class EventService {
     }
 
     public List<UserCountResponse> getEventsByDocIdAndDateRange(String docId, LocalDate startDate, LocalDate endDate) {
-        List<UserCountResponse> userCountResponses = new ArrayList<>();
-
         Set<EventEntity> eventEntities = eventRepository.findByDocIdAndTimestampBetween(
                 docId,
                 Timestamp.valueOf(startDate.atStartOfDay()).toString(),
-                Timestamp.valueOf(endDate.atTime(23, 59, 59)).toString()
+                Timestamp.valueOf(endDate.atTime(23, 59, 59, 999999999)).toString()
         );
 
         HashMap<LocalDate, Set<String>> userCountByDate = new HashMap<>();

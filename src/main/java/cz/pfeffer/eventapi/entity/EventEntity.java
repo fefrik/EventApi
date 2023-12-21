@@ -7,18 +7,16 @@ import lombok.Setter;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
-import org.hibernate.annotations.Immutable;
 
 @Entity
-@Immutable
 @Table(name = "EVENT", indexes = {
         @Index(name = "idx_docId", columnList = "docId"),
         @Index(name = "idx_userId", columnList = "userId"),
         @Index(name = "idx_timestamp", columnList = "timestamp")
 })
 @NoArgsConstructor
-@Getter
 @Setter
+@Getter
 public class EventEntity {
 
     @Id
